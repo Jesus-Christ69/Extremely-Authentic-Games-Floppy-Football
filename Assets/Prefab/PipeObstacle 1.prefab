@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipeSpawn: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 4
   pipeBottom: {fileID: 5199034730722681282}
   pipeTop: {fileID: 5696912475687239270}
   pipeObjs:

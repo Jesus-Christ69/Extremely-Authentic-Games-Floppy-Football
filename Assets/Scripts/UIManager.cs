@@ -9,8 +9,9 @@ public class UIManager : MonoBehaviour
     public static UIManager UI;
 
     public TMP_Text playerScore, HighScore, playerScoreGameOver;
-    public GameObject HighScoreText, GameOverBox;
+    public GameObject HighScoreText, BonusRoundTxt, GameOverBox;
     public Button MainMenu, PlayAgain;
+    public TextMeshProUGUI PlayAgainBtnTxt;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
 
         GameOverBox.SetActive(false);
         HighScoreText.SetActive(false);
+        BonusRoundTxt.SetActive(false);
     }
 
     // Update is called once per frame
@@ -43,13 +45,23 @@ public class UIManager : MonoBehaviour
         playerScore.text = GameManager.GM.PlayerScore.ToString();
     }
 
-    public void GameOver()
+    public void GameOver(bool BonusRound)
     {
         GameOverBox.SetActive(true);
-        if (GameManager.GM.PlayerScore > GameManager.GM.PlayerHighScore)
+        if (BonusRound)
         {
-            HighScoreText.SetActive(true);
-            HighScore.text = GameManager.GM.PlayerHighScore.ToString();
+            HighScoreText.SetActive(false);
+            BonusRoundTxt.SetActive(true);
+            PlayAgain.onClick.AddListener(() => GameManager.GM.LoadNewScene("BonusSpin", false));
+            PlayAgainBtnTxt.text = "Bonus Round";
+        }
+        else
+        {
+            if (GameManager.GM.PlayerScore > GameManager.GM.PlayerHighScore)
+            {
+                HighScoreText.SetActive(true);
+                HighScore.text = GameManager.GM.PlayerHighScore.ToString();
+            }
         }
         playerScoreGameOver.text = GameManager.GM.PlayerScore.ToString();
     }

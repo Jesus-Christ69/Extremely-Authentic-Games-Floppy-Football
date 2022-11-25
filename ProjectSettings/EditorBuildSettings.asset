@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/FlappyBird.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/BonusRound.unity
-    guid: 6bca1c0fe78e653428fb0e580f570482
+    path: Assets/Scenes/BonusSpin.unity
+    guid: 70805748114e6a84f870da913707ed66
   - enabled: 1
     path: Assets/Scenes/UI.unity
     guid: a42d8c90db417484480ea1895791b066

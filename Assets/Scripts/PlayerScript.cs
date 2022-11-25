@@ -20,6 +20,13 @@ public class PlayerScript : MonoBehaviour
         GameManager.GM.LoadNewScene("UI", true);
     }
 
+    private void Start()
+    {
+        if (!GameManager.GM.Continued)
+        {
+            GameManager.GM.PlayerScore = 0;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,7 +43,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.tag == "DeadZone")
         {
-            GameManager.GM.GameOverFunction();
+            GameManager.GM.GameOverFunction(BonusRound);
             Debug.Log("Player Died");
         }
         if (other.gameObject.tag == "BonusRound")
@@ -47,6 +54,13 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.tag == "AddPoints")
         {
             GameManager.GM.PlayerScore += PipeScore ;
+            GameManager.GM.JackpotScore += PipeScore * GameManager.GM.PlayerLevel;
+            if (GameManager.GM.PlayerScore >= (PipeScore * 10) * GameManager.GM.PlayerLevel)
+            {
+                GameObject.Find("PipeSpawner").GetComponent<PipeSpawn>().IncreaseSpeed();
+                Debug.Log("Level Up");
+                GameManager.GM.PlayerLevel++;
+            }
             Debug.Log("Add Points");
         }
     }
