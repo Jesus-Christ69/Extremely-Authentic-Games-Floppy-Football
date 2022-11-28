@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public UIManager uiManager;
+   // public UIManager uiManager;
     public static GameManager GM;
 
     public int JackpotScore;
@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOverFunction(bool bonusRound)
     {
-        uiManager.GameOver(bonusRound);
+        if (SceneManager.GetSceneByBuildIndex(5).IsValid())
+        UIManager.UI.GameOver(bonusRound);
 
         //UIManager.UI.GameOver(bonusRound);
         PlayerPrefs.SetInt("Jackpot", JackpotScore);
@@ -78,8 +79,9 @@ public class GameManager : MonoBehaviour
         GameOverFunction(false);
     }
 
-    public void ContinueBonus()
+    public void ContinueBonus(int bonus)
     {
+        PlayerScore = LevelEndScore + bonus;
         Continued = true;
         //UI Bonus Won
     }
@@ -87,6 +89,8 @@ public class GameManager : MonoBehaviour
     public void JackPotHit()
     {
         PlayerScore = LevelEndScore + JackpotScore;
+        JackpotScore = 0;
+        PlayerPrefs.SetInt("Jackpot", 0);
         GameOverFunction(false);
     }
 

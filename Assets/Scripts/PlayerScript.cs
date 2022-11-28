@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (GameManager.GM.Continued)
         {
-            GameManager.GM.PlayerScore = GameManager.GM.LevelEndScore;
+         //   GameManager.GM.PlayerScore = GameManager.GM.LevelEndScore;
         }
     }
 
@@ -45,6 +45,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.tag == "DeadZone")
         {
+            GameManager.GM.LevelEndScore = GameManager.GM.PlayerScore;
             GameManager.GM.GameOverFunction(BonusRound);
             Debug.Log("Player Died");
         }

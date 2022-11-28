@@ -19,7 +19,7 @@ public class SpinScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.UnloadSceneAsync("UI");
+        
         //Button Functions
         PlayAgainBtn.onClick.AddListener(() =>
         {
@@ -63,7 +63,7 @@ public class SpinScript : MonoBehaviour
                 }
                 if (PickerWheel.Label == "Continue")
                 {
-                    GameManager.GM.ContinueBonus();
+                    GameManager.GM.ContinueBonus(PickerWheel.Amount);
 
                     PlayAgainBtn.gameObject.SetActive(false);
                     ContinueBtn.gameObject.SetActive(true);
