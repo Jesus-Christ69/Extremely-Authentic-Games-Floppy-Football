@@ -6,7 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager UI;
+   // public static UIManager UI;
 
     public TMP_Text playerScore, HighScore, playerScoreGameOver;
     public GameObject HighScoreText, BonusRoundTxt, GameOverBox;
@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI PlayAgainBtnTxt;
 
     private void Awake()
-    {
+    {/*
         if (UI == null)
         {
             UI = this;
@@ -22,15 +22,22 @@ public class UIManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("UI Loaded");
+
+        GameManager.GM.uiManager = GetComponent<UIManager>();
+
         MainMenu.onClick.AddListener(() => GameManager.GM.LoadNewScene("MainMenu", false));
         PlayAgain.onClick.AddListener(() => GameManager.GM.LoadNewScene("FlappyBird", false));
-
+        PlayAgain.onClick.AddListener(() => {
+            GameManager.GM.LevelEndScore = GameManager.GM.PlayerScore;
+            GameManager.GM.LoadNewScene("BonusSpin", false);
+        });
         playerScore.text = GameManager.GM.PlayerScore.ToString();
         HighScore.text = GameManager.GM.PlayerHighScore.ToString();
 
@@ -52,7 +59,7 @@ public class UIManager : MonoBehaviour
         {
             HighScoreText.SetActive(false);
             BonusRoundTxt.SetActive(true);
-            PlayAgain.onClick.AddListener(() => GameManager.GM.LoadNewScene("BonusSpin", false));
+
             PlayAgainBtnTxt.text = "Bonus Round";
         }
         else

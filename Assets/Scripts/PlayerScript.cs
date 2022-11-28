@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -17,14 +18,15 @@ public class PlayerScript : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
 
-        GameManager.GM.LoadNewScene("UI", true);
+        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+        //GameManager.GM.LoadNewScene("UI", true);
     }
 
     private void Start()
     {
-        if (!GameManager.GM.Continued)
+        if (GameManager.GM.Continued)
         {
-            GameManager.GM.PlayerScore = 0;
+            GameManager.GM.PlayerScore = GameManager.GM.LevelEndScore;
         }
     }
 

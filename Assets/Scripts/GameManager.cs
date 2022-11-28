@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public UIManager uiManager;
     public static GameManager GM;
 
     public int JackpotScore;
 
     public int PlayerScore;
+    public int LevelEndScore;
     public int PlayerHighScore;
 
     public int PlayerLevel;
@@ -49,7 +51,9 @@ public class GameManager : MonoBehaviour
 
     public void GameOverFunction(bool bonusRound)
     {
-        UIManager.UI.GameOver(bonusRound);
+        uiManager.GameOver(bonusRound);
+
+        //UIManager.UI.GameOver(bonusRound);
         PlayerPrefs.SetInt("Jackpot", JackpotScore);
         if (PlayerScore > PlayerHighScore)
         {
@@ -60,9 +64,17 @@ public class GameManager : MonoBehaviour
         //PlayerScore = 0;
     }
 
+    public void BonusRoundOverHighScore()
+    {
+        PlayerHighScore = PlayerScore;
+        Debug.Log("Setting High Score");
+        PlayerPrefs.SetInt("HighScore", PlayerScore);
+    }
+
     public void BonusPointsAward(int bonus)
     {
-        PlayerScore += bonus;
+        Debug.Log("player score end bonus round: " + PlayerScore);
+        PlayerScore = LevelEndScore + bonus;
         GameOverFunction(false);
     }
 
@@ -74,15 +86,18 @@ public class GameManager : MonoBehaviour
 
     public void JackPotHit()
     {
-        PlayerScore = JackpotScore;
+        PlayerScore = LevelEndScore + JackpotScore;
         GameOverFunction(false);
     }
 
     public void LoadNewScene(string SceneName, bool Additive)
     {
-        if (Additive)
-            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
-        else
-            SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
+
+            SceneManager.LoadSceneAsync(SceneName);
+    }
+
+    public void UnloadScene(string ScenenName)
+    {
+        SceneManager.UnloadSceneAsync(ScenenName);
     }
 }
