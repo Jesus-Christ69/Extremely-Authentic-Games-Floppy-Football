@@ -17,7 +17,9 @@ public class Day1Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NewTip();
+        tipBarTextTimer = tipBarDefaultTimer * 2;
+        StartCoroutine(TipText(TipBarStrings[0]));
+        //NewTip();
         ProgressBar.maxValue = Day1Timer;
     }
 
@@ -35,7 +37,7 @@ public class Day1Script : MonoBehaviour
         foreach (char letter in text.ToCharArray())
         {
             tipBarText.text += letter;
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.02f);
         }
     }
 

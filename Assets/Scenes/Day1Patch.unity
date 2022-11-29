@@ -1280,6 +1280,11 @@ MonoBehaviour:
   - "Don\u2019t get your knickers in a twist"
   - Still loading... Just a matter of time
   - "Don\u2019t cry over spilled milk"
+  - "the waiting is the hardest part\r"
+  - "all good things come to those that wait\r"
+  - "Please wait with baited breath\r"
+  - "it's raining harder than a cow pissing on a flat rock\r"
+  - "there is a light at the end of the tunnel\r"
   tipBarText: {fileID: 1381483001}
   Day1Timer: 60
   tipBarDefaultTimer: 5

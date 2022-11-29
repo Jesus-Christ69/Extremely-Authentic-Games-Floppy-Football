@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
 
     public bool Continued = false;
 
+    // Game options Settings
+    public float MusicVolume;
+    public float AudioVolume;
+    private bool isFullScreen = false;
+    private Resolution screenResolution;
+
     private void Awake()
     {
         if (GM == null)
@@ -103,5 +109,17 @@ public class GameManager : MonoBehaviour
     public void UnloadScene(string ScenenName)
     {
         SceneManager.UnloadSceneAsync(ScenenName);
+    }
+
+    //Game option Settings
+    
+    public void isFullScreenUpdate(bool IsFullScreen)
+    {
+        isFullScreen = IsFullScreen;
+        Screen.fullScreen = IsFullScreen;
+    }
+    public void ResolutionUpdate(Resolution res)
+    {
+        Screen.SetResolution(res.width, res.height, isFullScreen);
     }
 }
