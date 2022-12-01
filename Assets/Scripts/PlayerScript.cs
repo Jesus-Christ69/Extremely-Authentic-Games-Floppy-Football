@@ -11,6 +11,9 @@ public class PlayerScript : MonoBehaviour
 
     public bool BonusRound = false;
 
+    public float spinSpeed = 10f;
+    public GameObject ballSprite;
+
     private void Awake()
     {
         if (rb == null)
@@ -41,18 +44,21 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
     }
 
+    private void FixedUpdate()
+    {
+        ballSprite.transform.Rotate(0, 0, rb.velocity.y);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "DeadZone")
         {
             GameManager.GM.LevelEndScore = GameManager.GM.PlayerScore;
             GameManager.GM.GameOverFunction(BonusRound);
-            Debug.Log("Player Died");
         }
         if (other.gameObject.tag == "BonusRound")
         {
             BonusRound = true;
-            Debug.Log("Bonus Round");
         }
         if (other.gameObject.tag == "AddPoints")
         {
@@ -64,7 +70,13 @@ public class PlayerScript : MonoBehaviour
                 Debug.Log("Level Up");
                 GameManager.GM.PlayerLevel++;
             }
-            Debug.Log("Add Points");
+        }
+        if (other.gameObject.tag == "Coin")
+        {
+            other.gameObject.SetActive(false);
+            GameManager.GM.PlayerScore += PipeScore;
+            GameManager.GM.JackpotScore += PipeScore * GameManager.GM.PlayerLevel;
+            AudioManager._AudioManager.PlaySound("Coin");
         }
     }
     private void OnTriggerExit(Collider other)

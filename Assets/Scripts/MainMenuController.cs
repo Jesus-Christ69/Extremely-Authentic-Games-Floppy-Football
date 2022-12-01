@@ -25,7 +25,8 @@ public class MainMenuController : MonoBehaviour
     }
 
     IEnumerator CloseMenu(string Scene)
-    {        
+    {
+        AudioManager._AudioManager.PlaySound("Menu");
         anim.SetTrigger("CloseMenu");
         yield return new WaitForSeconds(0.25f);
         GameManager.GM.LoadNewScene(Scene, false);

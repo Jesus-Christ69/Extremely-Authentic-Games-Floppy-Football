@@ -838,8 +838,8 @@ MonoBehaviour:
   numSpawns: 8
   StartX: 48
   ResetX: -48
-  minY: -2
-  maxY: 6
+  minY: -3
+  maxY: 5
 --- !u!4 &2123180601
 Transform:
   m_ObjectHideFlags: 0

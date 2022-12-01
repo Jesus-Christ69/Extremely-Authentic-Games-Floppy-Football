@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     public TMP_Text playerScore, HighScore, playerScoreGameOver;
     public GameObject HighScoreText, BonusRoundTxt, GameOverBox;
     public Button MainMenu, PlayAgain, BonusButton;
-    public TextMeshProUGUI PlayAgainBtnTxt;
 
     private void Awake()
     {
@@ -39,6 +38,9 @@ public class UIManager : MonoBehaviour
         playerScore.text = GameManager.GM.PlayerScore.ToString();
         HighScore.text = GameManager.GM.PlayerHighScore.ToString();
 
+        BonusButton.gameObject.SetActive(false);
+        PlayAgain.gameObject.SetActive(true);
+
         GameOverBox.SetActive(false);
         HighScoreText.SetActive(false);
         BonusRoundTxt.SetActive(false);
@@ -55,17 +57,21 @@ public class UIManager : MonoBehaviour
         GameOverBox.SetActive(true);
         if (BonusRound)
         {
-            HighScoreText.SetActive(false);
             BonusRoundTxt.SetActive(true);
-
-         /*   PlayAgain.onClick.AddListener(() => {
-                GameManager.GM.LevelEndScore = GameManager.GM.PlayerScore;
-                GameManager.GM.LoadNewScene("BonusSpin", false);
-            });*/
-            PlayAgainBtnTxt.text = "Bonus Round";
+            BonusButton.gameObject.SetActive(true);
+            PlayAgain.gameObject.SetActive(false);
+            /*   PlayAgain.onClick.AddListener(() => {
+                   GameManager.GM.LevelEndScore = GameManager.GM.PlayerScore;
+                   GameManager.GM.LoadNewScene("BonusSpin", false);
+               });*/
+         //   PlayAgainBtnTxt.text = "Bonus Round";
         }
         else
         {
+            BonusRoundTxt.SetActive(false);
+
+            BonusButton.gameObject.SetActive(false);
+            PlayAgain.gameObject.SetActive(true);
             if (GameManager.GM.PlayerScore > GameManager.GM.PlayerHighScore)
             {
                 HighScoreText.SetActive(true);

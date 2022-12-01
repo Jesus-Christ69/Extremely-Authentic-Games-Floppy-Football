@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             PlayerHighScore = PlayerPrefs.GetInt("HighScore");
         }
 
-        LoadNewScene("Day1Patch", false);
+       // LoadNewScene("Day1Patch", false);
     }
 
     public void GameOverFunction(bool bonusRound)

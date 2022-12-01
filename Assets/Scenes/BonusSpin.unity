@@ -2419,7 +2419,7 @@ PrefabInstance:
     - target: {fileID: 114361574848870256, guid: 160be82451391f6448834ec65286e007, type: 3}
       propertyPath: tickAudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 9589a769e1aece84e81cb375c647d6b6, type: 3}
+      objectReference: {fileID: 8300000, guid: 41bc996b3c01fbf4bab79109a1c0dcd7, type: 3}
     - target: {fileID: 114361574848870256, guid: 160be82451391f6448834ec65286e007, type: 3}
       propertyPath: wheelPieces.Array.size
       value: 6

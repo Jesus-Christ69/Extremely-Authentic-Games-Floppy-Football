@@ -10,11 +10,25 @@ public class OptionsController : MonoBehaviour
     public TMP_Dropdown ResolutionOption;
     public Slider AudioSlider, MusicSlider;
 
+    public Button MainMenuBtn, GameCredits;
+
     Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameCredits.onClick.AddListener(() => {
+            AudioManager._AudioManager.PlaySound("Menu");
+
+            GameManager.GM.LoadNewScene("GameCredits", false); });
+        MainMenuBtn.onClick.AddListener(() => {
+            AudioManager._AudioManager.PlaySound("Menu");
+
+            GameManager.GM.LoadNewScene("MainMenu", false); });
+
+        AudioSlider.value = GameManager.GM.AudioVolume;
+        MusicSlider.value = GameManager.GM.MusicVolume;
+
         resolutions = Screen.resolutions;
 
         ResolutionOption.ClearOptions();
