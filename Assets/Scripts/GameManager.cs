@@ -82,12 +82,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("player score end bonus round: " + PlayerScore);
         PlayerScore = LevelEndScore + bonus;
+        StartCoroutine(CoinDrop(Mathf.RoundToInt( bonus * 0.1f)));
         GameOverFunction(false);
     }
 
     public void ContinueBonus(int bonus)
     {
         PlayerScore = LevelEndScore + bonus;
+        StartCoroutine(CoinDrop(Mathf.RoundToInt(bonus * 0.1f)));
+
         Continued = true;
         //UI Bonus Won
     }
@@ -95,9 +98,22 @@ public class GameManager : MonoBehaviour
     public void JackPotHit()
     {
         PlayerScore = LevelEndScore + JackpotScore;
+        int bonus = JackpotScore;
         JackpotScore = 0;
+        StartCoroutine(CoinDrop(Mathf.RoundToInt(bonus * 0.1f)));
+
         PlayerPrefs.SetInt("Jackpot", 0);
         GameOverFunction(false);
+    }
+
+    //Coin Sounds after bonus
+    IEnumerator CoinDrop(int x)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            AudioManager._AudioManager.PlaySound("Coin");
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     public void LoadNewScene(string SceneName, bool Additive)

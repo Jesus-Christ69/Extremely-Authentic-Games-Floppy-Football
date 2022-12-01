@@ -33,7 +33,12 @@ public class UIManager : MonoBehaviour
        // GameManager.GM.uiManager = GetComponent<UIManager>();
 
         MainMenu.onClick.AddListener(() => GameManager.GM.LoadNewScene("MainMenu", false));
-        PlayAgain.onClick.AddListener(() => GameManager.GM.LoadNewScene("FlappyBird", false));
+        PlayAgain.onClick.AddListener(() =>
+        {
+            GameManager.GM.PlayerLevel = 1;
+            GameManager.GM.PlayerScore = 0;
+            GameManager.GM.LoadNewScene("FlappyBird", false);
+        });
         BonusButton.onClick.AddListener(() => GameManager.GM.LoadNewScene("BonusSpin", false));
         playerScore.text = GameManager.GM.PlayerScore.ToString();
         HighScore.text = GameManager.GM.PlayerHighScore.ToString();

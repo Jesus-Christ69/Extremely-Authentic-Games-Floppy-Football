@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
-    public Button PlayGame, GameOptions, GameCredits, QuitGame;
+    public Button PlayGame, GameOptions, GameCredits, QuitGame, HowToPlay;
 
     public Animator anim;
 
@@ -14,6 +14,8 @@ public class MainMenuController : MonoBehaviour
         PlayGame.onClick.AddListener(() => StartCoroutine(CloseMenu("FlappyBird")));
         GameOptions.onClick.AddListener(() => StartCoroutine(CloseMenu("OptionsMenu")));
         GameCredits.onClick.AddListener(() => StartCoroutine(CloseMenu("GameCredits")));
+        HowToPlay.onClick.AddListener(() => StartCoroutine(CloseMenu("HowToPlay")));
+        QuitGame.onClick.AddListener(() => Application.Quit());
       //  GameOptions.onClick.AddListener(() => GameManager.GM.LoadNewScene("GameOptions", false));
       //  GameCredits.onClick.AddListener(() => GameManager.GM.LoadNewScene("GameCredits", false));
     }

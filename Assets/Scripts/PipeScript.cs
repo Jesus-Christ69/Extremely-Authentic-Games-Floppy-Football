@@ -32,7 +32,7 @@ public class PipeScript : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-
+        
         if (transform.position.x <= pipeSpawn.ResetX)
         {
             pipeSpawn.ResetPipe(this.gameObject);

@@ -24,14 +24,17 @@ public class SpinScript : MonoBehaviour
         PlayAgainBtn.onClick.AddListener(() =>
         {
             GameManager.GM.PlayerScore = 0;
+            GameManager.GM.StopAllCoroutines();
             GameManager.GM.LoadNewScene("FlappyBird", false);
         });
         MainMenuBtn.onClick.AddListener(() =>
         {
+            GameManager.GM.StopAllCoroutines();
             GameManager.GM.LoadNewScene("MainMenu", false);
         });
         ContinueBtn.onClick.AddListener(() =>
         {
+            GameManager.GM.StopAllCoroutines();
             GameManager.GM.LoadNewScene("FlappyBird", false);
         });
 
@@ -40,7 +43,8 @@ public class SpinScript : MonoBehaviour
         SpinResultBox.SetActive(false);
         highScoreResult.SetActive(false);
         //Set equal to GM jackpot
-        pickerWheel.wheelPieces[4].Amount = GameManager.GM.JackpotScore;
+        pickerWheel.wheelPieces[3].Amount = GameManager.GM.JackpotScore;
+        pickerWheel.wheelPieces[7].Amount = GameManager.GM.JackpotScore;
 
         WheelSpinBtn.onClick.AddListener(() =>
         {
@@ -59,6 +63,8 @@ public class SpinScript : MonoBehaviour
                 }
                 if (PickerWheel.Label == "Jackpot")
                 {
+                    PlayAgainBtn.gameObject.SetActive(true);
+                    ContinueBtn.gameObject.SetActive(false);
                     GameManager.GM.JackPotHit();
                 }
                 if (PickerWheel.Label == "Continue")

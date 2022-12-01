@@ -14,6 +14,9 @@ public class PlayerScript : MonoBehaviour
     public float spinSpeed = 10f;
     public GameObject ballSprite;
 
+    public GameObject clickToStart;
+    public bool GameStarted = false;
+
     private void Awake()
     {
         if (rb == null)
@@ -31,6 +34,8 @@ public class PlayerScript : MonoBehaviour
         {
          //   GameManager.GM.PlayerScore = GameManager.GM.LevelEndScore;
         }
+        clickToStart.SetActive(true);
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -38,6 +43,13 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            if (!GameStarted)
+            {
+                clickToStart.SetActive(false);
+
+                GameStarted = true;
+                Time.timeScale = 1;
+            }
             rb.AddForce(Vector3.up * UpForce * Time.deltaTime);
         }
 
@@ -64,7 +76,7 @@ public class PlayerScript : MonoBehaviour
         {
             GameManager.GM.PlayerScore += PipeScore ;
             GameManager.GM.JackpotScore += PipeScore * GameManager.GM.PlayerLevel;
-            if (GameManager.GM.PlayerScore >= (PipeScore * 10) * GameManager.GM.PlayerLevel)
+            if (GameManager.GM.PlayerScore >= (PipeScore * 10) * GameManager.GM.PlayerLevel && GameManager.GM.PlayerLevel <= 8)
             {
                 GameObject.Find("PipeSpawner").GetComponent<PipeSpawn>().IncreaseSpeed();
                 Debug.Log("Level Up");

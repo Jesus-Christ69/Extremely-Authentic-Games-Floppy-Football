@@ -41,8 +41,8 @@ public class OptionsController : MonoBehaviour
         {
             string option = resolutions[i].width + " x " + resolutions[i].height + " - " + resolutions[i].refreshRate;
             resolutionString.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width &&
+                resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
